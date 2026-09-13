@@ -23,7 +23,15 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest", "black", "ruff"]
-tutorials = ["jupyter", "matplotlib"]
+tutorials = ["pfdf[tutorials]>=3.0.4,<4", "jupyter"]
+
+# NOTE: pfdf is NOT on PyPI. It ships from USGS's own GitLab package
+# registry, so installing this project requires the extra index below:
+#
+#   pip install -e ".[dev,tutorials]" \
+#     --extra-index-url https://code.usgs.gov/api/v4/groups/859/-/packages/pypi/simple
+#
+# See README.md "Getting started" and PROGRESS.md "Known issues".
 
 [build-system]
 requires = ["setuptools>=68", "wheel"]

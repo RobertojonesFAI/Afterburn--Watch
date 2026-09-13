@@ -54,7 +54,12 @@ data/           # local data (gitignored -- raw/interim/processed)
 
 ```bash
 python -m venv .venv && source .venv/bin/activate
-pip install -e ".[dev,tutorials]"
+
+# pfdf is NOT on PyPI -- it's published on USGS's own GitLab package
+# registry, so you need the extra index below or the install will fail
+# with "No matching distribution found for pfdf".
+pip install -e ".[dev,tutorials]" \
+  --extra-index-url https://code.usgs.gov/api/v4/groups/859/-/packages/pypi/simple
 
 # run tests
 pytest
@@ -63,7 +68,10 @@ pytest
 streamlit run src/afterburn_watch/app.py
 ```
 
-`pfdf` requires Python >=3.11.
+`pfdf` requires Python >=3.11. If the install above still fails, see
+`pfdf`'s own [fallback instructions](https://ghsc.code-pages.usgs.gov/lhp/pfdf/resources/installation)
+(clone + `poetry install`) -- and note this to the team, since it likely
+means something else about the environment needs attention too.
 
 ## Team (Afterburn Watch)
 
