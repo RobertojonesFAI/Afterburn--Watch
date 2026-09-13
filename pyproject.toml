@@ -1,0 +1,33 @@
+[project]
+name = "afterburn-watch"
+version = "0.1.0"
+description = "Automated pipeline that turns Sentinel-2 imagery into burn-severity inputs for USGS post-fire debris-flow hazard models, so emergency managers can get an answer in hours instead of weeks."
+readme = "README.md"
+requires-python = ">=3.11,<4"
+license = { text = "TBD" }
+authors = [
+    { name = "Roberto Jones" },
+    { name = "Troy Jenks" },
+    { name = "Ashraf Md" },
+]
+keywords = ["wildfire", "debris-flow", "burn-severity", "dNBR", "hazard", "usgs", "sentinel-2"]
+
+dependencies = [
+    "pfdf>=3.0.4,<4",
+    "pystac-client",
+    "rasterio",
+    "streamlit",
+    "folium",
+    "streamlit-folium",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "black", "ruff"]
+tutorials = ["jupyter", "matplotlib"]
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
