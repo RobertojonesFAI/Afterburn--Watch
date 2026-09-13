@@ -64,13 +64,8 @@ spreadsheet going forward.
   outputs. Overlay rendering would lean on image masking and OpenStreetMap
   basemaps.
 
-## Team coordination (from Troy's Sept 13 email)
+## Team coordination 
 
-- [ ] Add Troy as a GitHub collaborator (GitHub: `TroyDJenks`, email:
-  `Jenks.Troy@gmail.com`) -- needs to be done from GitHub Settings ->
-  Collaborators by whoever has admin on the repo.
-- [ ] Add Ashraf as a collaborator too (still pending from the original
-  kickoff action item).
 - **Rescoping flag from Troy:** comparing our project definition
   (`docs/technical-spec.md`) against what `pfdf` actually provides,
   the scope may need adjusting. Worth a team discussion on exactly which
@@ -79,7 +74,7 @@ spreadsheet going forward.
   surface area, given the timeline.
 - [ ] Log individual hangups/observations in the team's shared sheet:
   https://docs.google.com/spreadsheets/d/1bt3khGChtJN0ZtciiSZbD0SmtfXGdAmyLdU0RPFgcLI/edit
-  (separate from this file -- Troy asked for a personal tracking tab per
+  (separate from this file -- personal tracking tab per
   person there, in addition to the shared `PROGRESS.md` here).
 
 ## Not started yet
