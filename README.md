@@ -18,18 +18,43 @@ the National Weather Service the response time they need.
 
 Afterburn Watch is an automated Python pipeline that:
 
-1. Pulls Sentinel-2 imagery from AWS Open Data (no auth required) for a
-   given fire perimeter.
-2. Computes the differenced Normalized Burn Ratio (dNBR) and classifies
-   burn severity (BAER breaks, with regional thresholds under evaluation).
-3. Formats the result as input for [`pfdf`](https://code.usgs.gov/ghsc/lhp/pfdf),
+1. Pulls a NASA RECOVER data package for a given fire (already contains
+   dNBR, fire perimeter, roads, and soils -- see
+   [`recover.py`](src/afterburn_watch/recover.py)). This is our primary
+   data source, per direct guidance from our domain advisor (see "Why
+   RECOVER and not our own Sentinel-2 pipeline?" below).
+2. Feeds that severity data into [`pfdf`](https://code.usgs.gov/ghsc/lhp/pfdf),
    USGS's official post-fire debris-flow hazard-assessment library
    (Cannon et al. 2010, Gartner et al. 2014, Staley et al. 2017 models).
-4. Renders an interactive map (Streamlit + Folium) so a fire manager can
+3. Renders an interactive map (Streamlit + Folium) so a fire manager can
    see burn severity, catchment boundaries, and hazard estimates without
    waiting on a manual, weeks-long turnaround.
 
+A fallback/research path ([`ingest.py`](src/afterburn_watch/ingest.py) +
+[`severity.py`](src/afterburn_watch/severity.py)) can compute dNBR
+ourselves from Sentinel-2 for a fire RECOVER doesn't cover, or to
+cross-check RECOVER's own dNBR.
+
 Benchmark case: the **2024 Wapiti Fire** (central Idaho).
+
+### Why RECOVER and not our own Sentinel-2 pipeline?
+
+On the Sept 11, 2026 kickoff call, our domain advisor (Keith Weber, GIS
+TReC, Idaho State University) reviewed our original roadmap live and said:
+
+> "I'm not convinced that the work with Sentinel and DNBR production is
+> necessary... I would recommend we could almost kick out a week or even
+> two weeks [of that work] and focus those efforts on the development of
+> the actual debris flow likelihood model, debris flow volume model, and
+> hopefully improve it."
+
+His reasoning: a NASA RECOVER package for a fire already contains an
+authoritative dNBR (produced by USFS or USGS, the same source federal
+stakeholders already trust), so computing our own from raw Sentinel-2
+bands is redundant for the timeline we have, and risks the output looking
+less credible to agencies like BLM/USACE than if we used their own
+accepted data. See [`docs/technical-spec.md`](docs/technical-spec.md)
+section 8 and [`PROGRESS.md`](PROGRESS.md) for the full context.
 
 See [`docs/technical-spec.md`](docs/technical-spec.md) for the full
 architecture, formulas, and roadmap, and [`PROGRESS.md`](PROGRESS.md) for
@@ -39,8 +64,9 @@ where things currently stand.
 
 ```
 src/afterburn_watch/
-  severity.py   # NBR / dNBR / BAER classification (unit tested)
-  ingest.py     # Sentinel-2 scene discovery via the Earth Search STAC API
+  recover.py    # NASA RECOVER data package retrieval (PRIMARY path)
+  severity.py   # NBR / dNBR / BAER classification (fallback path, unit tested)
+  ingest.py     # Sentinel-2 scene discovery via Earth Search STAC (fallback path)
   app.py        # Streamlit decision-support map (entry point)
 docs/
   technical-spec.md

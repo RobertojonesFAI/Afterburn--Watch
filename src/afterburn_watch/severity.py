@@ -1,5 +1,12 @@
 """Burn-severity computation: NBR, differenced NBR (dNBR), and BAER classification.
 
+FALLBACK / RESEARCH PATH -- kept for computing our own dNBR from Sentinel-2
+(via ingest.py) when needed, but per Keith Weber's Sept 11 call
+recommendation our primary source is a pre-built NASA RECOVER package
+(see recover.py), which already ships a finished dNBR. These functions are
+still useful to validate RECOVER's dNBR or to classify severity from a
+raster we did compute ourselves.
+
 These are the core spectral formulas from the project's technical spec
 (see docs/technical-spec.md). They are intentionally dependency-light
 (pure NumPy) so they can be unit tested without a full raster stack.

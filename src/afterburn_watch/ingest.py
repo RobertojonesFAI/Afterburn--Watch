@@ -1,5 +1,12 @@
 """Sentinel-2 scene discovery via the AWS Earth Search STAC API.
 
+FALLBACK / RESEARCH PATH -- not the primary one. Per Keith Weber's Sept 11
+call recommendation (docs/technical-spec.md section 8, PROGRESS.md), our
+primary data source is a pre-built NASA RECOVER package (see recover.py),
+which already contains dNBR. This module stays useful for a fire RECOVER
+doesn't cover yet, or to validate RECOVER's own dNBR against a fresh
+Sentinel-2 computation -- but it is not time-critical anymore.
+
 This is a starting point, not a finished pipeline -- the open research
 questions from docs/technical-spec.md still need to be resolved here:
 
