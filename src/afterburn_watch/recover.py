@@ -1,14 +1,15 @@
 """NASA RECOVER data package retrieval -- the PRIMARY data path.
 
-Per Keith Weber's live recommendation on the Sept 11, 2026 kickoff call
-(see docs/technical-spec.md section 8 and PROGRESS.md), we do not compute
-dNBR ourselves as the default path. Instead we pull it from a NASA RECOVER
-data package, which already bundles dNBR, fire perimeter, roads, and soils
-for a given fire -- produced by the authoritative agency (USFS for USDA
-land, USGS for DOI land). This keeps our output aligned with the data
-federal stakeholders (BLM, USACE, NWS) already trust.
+Per guidance from our domain advisor (see docs/technical-spec.md section 8
+and PROGRESS.md), we do not compute dNBR ourselves as the default path.
+Instead we pull it from a NASA RECOVER data package, which already bundles
+dNBR, fire perimeter, roads, and soils for a given fire -- produced by the
+authoritative agency (USFS for USDA land, USGS for DOI land). This keeps
+our output aligned with the data federal stakeholders (BLM, USACE, NWS)
+already trust.
 
-Manual process today (per Keith, describing the ArcGIS dashboard):
+Manual process today (per our domain advisor, describing the ArcGIS
+dashboard):
   1. Open the RECOVER ArcGIS dashboard:
      https://www.arcgis.com/apps/dashboards/68f43718f2474f369c587a97d32cd0cf
   2. Click the target fire's polygon (default: 2024 Wapiti Fire, central

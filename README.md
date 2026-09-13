@@ -39,22 +39,16 @@ Benchmark case: the **2024 Wapiti Fire** (central Idaho).
 
 ### Why RECOVER and not our own Sentinel-2 pipeline?
 
-On the Sept 11, 2026 kickoff call, our domain advisor (Keith Weber, GIS
-TReC, Idaho State University) reviewed our original roadmap live and said:
-
-> "I'm not convinced that the work with Sentinel and DNBR production is
-> necessary... I would recommend we could almost kick out a week or even
-> two weeks [of that work] and focus those efforts on the development of
-> the actual debris flow likelihood model, debris flow volume model, and
-> hopefully improve it."
-
-His reasoning: a NASA RECOVER package for a fire already contains an
-authoritative dNBR (produced by USFS or USGS, the same source federal
-stakeholders already trust), so computing our own from raw Sentinel-2
-bands is redundant for the timeline we have, and risks the output looking
-less credible to agencies like BLM/USACE than if we used their own
-accepted data. See [`docs/technical-spec.md`](docs/technical-spec.md)
-section 8 and [`PROGRESS.md`](PROGRESS.md) for the full context.
+Guidance from our domain advisor, Keith Weber (GIS TReC, Idaho State
+University), shaped this priority. A NASA RECOVER package for a fire
+already contains an authoritative dNBR (produced by USFS or USGS, the
+same source federal stakeholders already trust), so computing our own
+from raw Sentinel-2 bands is redundant for the timeline we have, and
+risks the output looking less credible to agencies like BLM/USACE than if
+we used their own accepted data. That freed-up time goes instead toward
+the debris-flow likelihood and volume modeling work. See
+[`docs/technical-spec.md`](docs/technical-spec.md) section 8 and
+[`PROGRESS.md`](PROGRESS.md) for further context.
 
 See [`docs/technical-spec.md`](docs/technical-spec.md) for the full
 architecture, formulas, and roadmap, and [`PROGRESS.md`](PROGRESS.md) for

@@ -18,10 +18,10 @@ post-fire debris-flow likelihood and volume models (`pfdf`). An
 interactive decision-support map lets emergency managers evaluate
 post-fire risk in **hours rather than weeks**.
 
-> **Updated Sept 11** after the team kickoff call with Keith Weber: we are
-> *not* prioritizing our own Sentinel-2 dNBR production (see section 8
-> below) -- that's now a fallback/research track. The primary path pulls
-> the dNBR straight out of an already-published RECOVER package.
+> **Update:** per guidance from our domain advisor, we are *not*
+> prioritizing our own Sentinel-2 dNBR production (see section 8 below)
+> -- that's now a fallback/research track. The primary path pulls the
+> dNBR straight out of an already-published RECOVER package.
 
 ## 2. Hackathon Context
 
@@ -48,7 +48,7 @@ post-fire risk in **hours rather than weeks**.
 
 ## 4. Pipeline Architecture
 
-**Primary path (per Keith's Sept 11 call recommendation):**
+**Primary path (per guidance from our domain advisor):**
 
 1. **RECOVER package retrieval** -- pull the NASA RECOVER data package for
    the target fire (default: 2024 Wapiti Fire) from the ArcGIS dashboard's
@@ -114,41 +114,32 @@ or to validate RECOVER's own dNBR -- lower priority, see PROGRESS.md):
 | Sept 28 (Sprint 4) | Package prototype; multi-fire dropdown selector. | Finalize market-viability slides. | Review model assumptions & counterpoints. | Package full deck; internal review. |
 | Oct 5-13 (Final) | Bug fixes; lock demo environment. | Polish pitch delivery & Q&A prep. | Finalize technical summary tables. | Live dry runs; present Oct 13. |
 
-## 8. Data source strategy (decided live on the Sept 11 kickoff call)
+## 8. Data source strategy
 
-Direct quotes from the call transcript (Keith Weber), reviewing our
-roadmap live with the team:
+Guidance from our domain advisor, Keith Weber (GIS TReC, Idaho State
+University), on prioritizing pre-built authoritative data over generating
+our own:
 
-> "I'm not convinced that the work with Sentinel and DNBR production is
-> necessary. It's a very very short term [timeline]."
+Sentinel-2/dNBR production is not the best use of our limited timeline. A
+NASA RECOVER data package for a given fire already contains a finished
+dNBR, along with the fire perimeter, roads, and soils, produced by the
+authoritative agency (USFS for USDA land, USGS for DOI land). Straying
+from that authoritative source risks the output not being trusted or
+adopted by the actual stakeholders (BLM, USACE, NWS). The recommendation
+is to redirect that time toward developing the debris-flow likelihood
+model and the debris-flow volume model instead. **Practical effect:** we
+are not generating a new dNBR product from scratch as our primary path,
+and we are not even computing it ourselves from Sentinel-2 as the default
+-- we pull it pre-made from an authoritative RECOVER package and spend the
+freed-up time on the `pfdf` hazard/likelihood/volume modeling instead
+(section 4, steps 1-4). Sentinel-2 ingestion and our own dNBR computation
+(section 4, steps 5-8) remain in the repo as a fallback/research track:
+useful for a fire RECOVER doesn't cover yet, or to validate RECOVER's own
+dNBR, but no longer the critical path.
 
-> "[If you download a NASA RECOVER package] you'll see that the DNBR is
-> already there. The fire perimeter is already in it. The roads, the
-> soils, it's all inside that zip file... when we're working with federal
-> agencies... if we stray too far away from their accepted data sources,
-> their authoritative data sources, they don't want to use it."
+The benchmark fire is confirmed as the 2024 Wapiti Fire, already named in
+section 2. Its RECOVER package is retrieved via the ArcGIS dashboard's
+"hamburger menu -> bulk download -> previous years" archive (see
+`recover.py`).
 
-> "I would recommend... we could almost kick out a week or even two weeks
-> [of Sentinel/dNBR work] and focus those efforts on the development of
-> the actual debris flow likelihood model, debris flow volume model, and
-> hopefully improve it."
-
-Troy agreed live on the call. **Practical effect:** we are not generating
-a new dNBR product from scratch as our primary path, and we are not even
-computing it ourselves from Sentinel-2 as the default -- we pull it
-pre-made from an authoritative RECOVER package and spend the freed-up time
-on the `pfdf` hazard/likelihood/volume modeling instead (section 4, steps
-1-4). Sentinel-2 ingestion and our own dNBR computation (section 4, steps
-5-8) remain in the repo as a fallback/research track: useful for a fire
-RECOVER doesn't cover yet, or to validate RECOVER's own dNBR, but no
-longer the critical path.
-
-Keith also confirmed the benchmark fire live on the call: "the interest
-was in the Wapati fire from a couple of years ago" -- consistent with the
-2024 Wapiti Fire already named in section 2. Its RECOVER package is
-retrieved via the ArcGIS dashboard's "hamburger menu -> bulk download ->
-previous years" archive (see `recover.py`).
-
-See `PROGRESS.md` for the full context and for the (unrelated, but
-recorded on the same call) note about MRMS/multi-radar precipitation data,
-which Keith also said he'd "rather us not go into."
+See `PROGRESS.md` for further context.

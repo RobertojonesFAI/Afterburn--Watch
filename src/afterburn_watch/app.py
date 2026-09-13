@@ -8,10 +8,10 @@ Target UX (from docs/technical-spec.md, section 4):
   * dNBR / burn-severity raster overlay.
   * Catchment-scale vulnerability summary panel.
 
-Per Keith Weber's Sept 11 call recommendation (docs/technical-spec.md
-section 8, PROGRESS.md), the primary data path is a pre-built NASA RECOVER
-package (recover.py), not our own Sentinel-2 ingestion (ingest.py /
-severity.py, kept as a fallback/research track).
+Per guidance from our domain advisor (docs/technical-spec.md section 8,
+PROGRESS.md), the primary data path is a pre-built NASA RECOVER package
+(recover.py), not our own Sentinel-2 ingestion (ingest.py / severity.py,
+kept as a fallback/research track).
 """
 
 from __future__ import annotations

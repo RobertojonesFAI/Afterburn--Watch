@@ -77,53 +77,41 @@ spreadsheet going forward.
   (separate from this file -- personal tracking tab per
   person there, in addition to the shared `PROGRESS.md` here).
 
-## Scope decision -- Sept 11 kickoff call with Keith
+## Scope decision -- prioritize authoritative data over new production
 
-Confirmed directly from the call transcript (not just the AI-generated
-meeting minutes). This changes our priority order below.
+Guidance from our domain advisor, Keith Weber (GIS TReC, Idaho State
+University). This changes our priority order below.
 
-- **On Sentinel-2 / dNBR production:** Keith reviewed our roadmap live on
-  the call and said: *"I'm not convinced that the work with Sentinel and
-  DNBR production is necessary. It's a very very short term [timeline]."*
-  His reasoning: if you download a NASA RECOVER data package for a given
-  fire, **the dNBR is already inside the zip**, along with the fire
-  perimeter, roads, and soils -- already produced by the authoritative
-  agency (USFS for USDA land, USGS for DOI land). Straying from that
-  authoritative source risks the output not being trusted/adopted by the
-  actual stakeholders (BLM, USACE, NWS). His recommendation: *"we could
-  almost kick out a week or even two weeks [of Sentinel/dNBR work] and
-  focus those efforts on the development of the actual debris flow
-  likelihood model, debris flow volume model, and hopefully improve it."*
-  Troy agreed live on the call.
+- **On Sentinel-2 / dNBR production:** producing our own dNBR from raw
+  Sentinel-2 bands is not the best use of our limited timeline. A NASA
+  RECOVER data package for a given fire already contains a finished
+  dNBR, along with the fire perimeter, roads, and soils -- already
+  produced by the authoritative agency (USFS for USDA land, USGS for DOI
+  land). Straying from that authoritative source risks the output not
+  being trusted or adopted by the actual stakeholders (BLM, USACE, NWS).
+  The recommendation is to redirect that time toward developing the
+  debris-flow likelihood model and the debris-flow volume model instead.
   - **Practical effect:** our own Sentinel-2 STAC ingestion (`ingest.py`)
     and NBR/dNBR computation (`severity.py`) are now a **fallback / research
     path**, not the primary one. The primary path is: pull the NASA
     RECOVER package for our benchmark fire, extract its dNBR/severity
     raster, and feed that straight into `pfdf`'s hazard, likelihood, and
     volume functions.
-- **On MRMS:** unrelated to our team directly, but noted for context --
-  when Roberto asked whether USGS uses multi-radar/multi-sensor
-  precipitation data, Keith said *"I would rather us not go into that
-  part of the study."* USGS's model runs off a fixed quarter-inch/hour
-  rainfall assumption, not live radar. (This is actually what Debris Flow
-  Hunters' spec proposes building -- not our problem to fix, just noting
-  the call is on record either way.)
-- **Confirmed fire:** Keith confirmed the benchmark is the **Wapiti Fire**
-  ("the interest was in the Wapati fire from a couple of years ago") and
-  that its RECOVER package is retrieved via the ArcGIS dashboard's bulk
-  download / previous-years archive (see `recover.py`).
+- **Confirmed fire:** the benchmark is the **Wapiti Fire** (2024, central
+  Idaho), and its RECOVER package is retrieved via the ArcGIS dashboard's
+  bulk download / previous-years archive (see `recover.py`).
 
-## Not started yet (reprioritized after the call above)
+## Not started yet (reprioritized per the scope decision above)
 
 - [ ] **New primary path:** download & parse the NASA RECOVER data
   package for the 2024 Wapiti Fire (see `recover.py` stub) and extract
   its dNBR/severity raster.
 - [ ] Wiring that severity data into `pfdf`'s likelihood (Staley/M1) and
   volume (Gartner) hazard-assessment functions -- this is now the main
-  event, per Keith's recommendation to spend the freed-up time here.
+  event, per the scope decision above to spend the freed-up time here.
 - [ ] Folium map overlay in `app.py`
-- [ ] *(Fallback / research track, lower priority per the call above)*
-  Real Sentinel-2 ingestion for the Wapiti Fire, L1C vs. L2A decision,
+- [ ] *(Fallback / research track, lower priority per the scope decision
+  above)* Real Sentinel-2 ingestion for the Wapiti Fire, L1C vs. L2A decision,
   SCL cloud/smoke masking, BAER vs. regional-ecoregion thresholds --
   keep for a fire RECOVER doesn't cover, or to validate against RECOVER's
   own dNBR.
